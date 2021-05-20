@@ -16,17 +16,17 @@ namespace BloggingPlatform.Core.Configuration
                 new Tag
                 {
                     Id = 1,
-                    Title = "iOS"
+                    Title = "Tag1"
                 },
                 new Tag
                 {
                     Id = 2,
-                    Title = "AR"
+                    Title = "Tag2"
                 }, 
                 new Tag
                 {
                     Id = 3,
-                    Title = "Gazzda"
+                    Title = "Tag3"
                 }
             );
         }

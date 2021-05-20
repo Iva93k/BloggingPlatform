@@ -17,11 +17,11 @@ namespace BloggingPlatform.Infrastructure
         public DbSet<BlogPost> BlogPost { get; set; }
         public DbSet<Tag> Tag { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfiguration(new BlogPostConfiguration());
-            modelBuilder.ApplyConfiguration(new TagConfiguration());
-            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.ApplyConfiguration(new BlogPostConfiguration());
+        //    modelBuilder.ApplyConfiguration(new TagConfiguration());
+        //    //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        //}
     }
 }

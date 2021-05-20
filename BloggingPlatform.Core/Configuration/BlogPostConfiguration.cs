@@ -16,38 +16,38 @@ namespace BloggingPlatform.Core.Configuration
                 new BlogPost
                 {
                     Id = 1,
-                    Title = "Augmented Reality iOS Application",
-                    Slug = "augmented-reality-ios-application",
-                    Description = "Rubicon Software Development and Gazzda furniture are proud to launch an augmented reality app.",
-                    Body = "The app is simple to use, and will help you decide on your best furniture fit.",
-                    CreatedAt = new DateTime(2018, 05, 18, 03, 22, 56),
+                    Title = "Blogging platform post",
+                    Slug = "blogging-platform-post",
+                    Description = "This is a test post.",
+                    Body = "Every post must have title, body and description, and can have multiple tags.",
+                    CreatedAt = new DateTime(2018, 05, 18, 03, 22, 56)                
                 },
                 new BlogPost
                 {
                     Id = 2,
-                    Title = "Augmented Reality iOS Application 2",
-                    Slug = "augmented-reality-ios-application-2",
-                    Description = "Rubicon Software Development and Gazzda furniture are proud to launch an augmented reality app.",
-                    Body = "The app is simple to use, and will help you decide on your best furniture fit.",
-                    CreatedAt = DateTime.Now,
+                    Title = "Blogging platform post 2",
+                    Slug = "blogging-platform-post-2",
+                    Description = "This is a test post.",
+                    Body = "Every post must have title, body and description, and can have multiple tags.",
+                    CreatedAt = new DateTime(2018, 05, 18, 03, 22, 56)                
                 },
                 new BlogPost
                 {
                     Id = 3,
-                    Title = "Augmented Reality iOS Application 3",
-                    Slug = "augmented-reality-ios-application-3",
-                    Description = "Rubicon Software Development and Gazzda furniture are proud to launch an augmented reality app.",
-                    Body = "The app is simple to use, and will help you decide on your best furniture fit.",
-                    CreatedAt = new DateTime(2020, 05, 18, 06, 22, 56),
+                    Title = "Blogging platform post 3",
+                    Slug = "blogging-platform-post-3",
+                    Description = "This is a test post.",
+                    Body = "Every post must have title, body and description, and can have multiple tags.",
+                    CreatedAt = new DateTime(2018, 05, 18, 03, 22, 56)                
                 },
                 new BlogPost
                 {
                     Id = 4,
-                    Title = "Augmented Reality iOS Application 4",
-                    Slug = "augmented-reality-ios-application-4",
-                    Description = "Rubicon Software Development and Gazzda furniture are proud to launch an augmented reality app.",
-                    Body = "The app is simple to use, and will help you decide on your best furniture fit.",
-                    CreatedAt = new DateTime(2021, 05, 18, 04, 15, 00)
+                    Title = "Blogging platform post 4",
+                    Slug = "blogging-platform-post-4",
+                    Description = "This is a test post.",
+                    Body = "Every post must have title, body and description, and can have multiple tags.",
+                    CreatedAt = new DateTime(2018, 05, 18, 03, 22, 56)                
                 }
             );
         }
