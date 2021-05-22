@@ -20,8 +20,6 @@ namespace BloggingPlatform.Core.Entities
         [Required]
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
-
-        public ICollection<Tag> Tags { get; set; }
-
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }

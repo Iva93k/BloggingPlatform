@@ -12,6 +12,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using BloggingPlatform.API.Interfaces;
+using BloggingPlatform.API.Services;
+using BloggingPlatform.Core.Interfaces;
+using BloggingPlatform.Infrastructure.Repository;
 
 namespace BloggingPlatform.API
 {
@@ -31,6 +35,8 @@ namespace BloggingPlatform.API
                 opts.UseSqlServer(Configuration.GetConnectionString("SqlConnection"),
                     options => options.MigrationsAssembly("BloggingPlatform.Infrastructure")));
 
+            services.AddScoped<IBlogPostService, BlogPostService>();
+            services.AddScoped<IBlogPostRepository, BlogPostRepository>();
             services.AddControllers();
         }
 

@@ -11,6 +11,6 @@ namespace BloggingPlatform.Core.Entities
         [Required(ErrorMessage = "Title is required.")]
         [MaxLength(50, ErrorMessage = "Title can't be longer than 50 characters.")]
         public string Title { get; set; }
-        public ICollection<BlogPost> BlogPosts { get; set; }
+        public virtual ICollection<BlogPost> BlogPosts { get; set; }
     }
 }
