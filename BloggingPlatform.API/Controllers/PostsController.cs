@@ -25,8 +25,22 @@ namespace BloggingPlatform.API.Controllers
         [HttpGet]
         public ActionResult<MultipleBlogPostsDTO> GetAllBlogPosts([FromQuery] string tag)
         {
-            var blogPosts = _blogPostService.GetBlogPosts(tag);
-            return Ok(blogPosts);
+            try
+            {
+                var blogPosts = _blogPostService.GetBlogPosts(tag);
+                if (blogPosts == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(blogPosts);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
         //GET api/posts/slug
         [HttpGet("{slug}")]
