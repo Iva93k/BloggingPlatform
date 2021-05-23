@@ -1,6 +1,7 @@
 ﻿using BloggingPlatform.API.Interfaces;
 using BloggingPlatform.API.Models.BindingModels;
 using BloggingPlatform.API.Models.DTOModels;
+using BloggingPlatform.Core.Entities;
 using BloggingPlatform.Core.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -31,9 +32,36 @@ namespace BloggingPlatform.API.Services
             throw new NotImplementedException();
         }
 
-        public SingleBlogPostDTO GetBlogPost(string slug)
+        public SingleBlogPostDTO GetBlogPostBySlug(string slug)
         {
-            throw new NotImplementedException();
+            SingleBlogPostDTO singleBlogPostDTO = new SingleBlogPostDTO();
+            List<string> list = new List<string>();
+
+            var blogPost = _blogPostRepository.GetBlogPostBySlug(slug);
+
+            if (blogPost != null)
+            {
+                BlogPostDTO blogPostDTO = new BlogPostDTO();
+
+                blogPostDTO.Title = blogPost.Title;
+                blogPostDTO.Description = blogPost.Description;
+                blogPostDTO.Body = blogPost.Body;
+                blogPostDTO.Slug = blogPost.Slug;
+                blogPostDTO.CreatedAt = blogPost.CreatedAt;
+                blogPostDTO.UpdatedAt = blogPost.UpdatedAt;
+
+                foreach (var singleTag in blogPost.Tags)
+                {
+                    list.Add(singleTag.Title);
+                }
+
+                string[] tags = list.ToArray();
+                blogPostDTO.TagList = tags;
+
+                singleBlogPostDTO.BlogPost = blogPostDTO;
+            }
+
+            return singleBlogPostDTO;
         }
         public MultipleBlogPostsDTO GetBlogPosts(string tag)
         {

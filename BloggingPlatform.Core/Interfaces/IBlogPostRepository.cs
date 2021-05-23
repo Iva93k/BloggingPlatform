@@ -9,7 +9,7 @@ namespace BloggingPlatform.Core.Interfaces
     public interface IBlogPostRepository
     {
         IEnumerable<BlogPost> GetBlogPosts(string tag);
-        BlogPost GetBlogPost(string slug);
+        BlogPost GetBlogPostBySlug(string slug);
         BlogPost CreateBlogPost(BlogPost blogPost);
         BlogPost UpdateBlogPost(BlogPost blogPost);
         void Delete(string slug);

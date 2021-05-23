@@ -26,9 +26,11 @@ namespace BloggingPlatform.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public BlogPost GetBlogPost(string slug)
+        public BlogPost GetBlogPostBySlug(string slug)
         {
-            throw new NotImplementedException();
+            var blogPost = _efcontext.BlogPost.Include(p => p.Tags).Where(p => p.Slug == slug).FirstOrDefault();
+
+            return blogPost;
         }
 
         public IEnumerable<BlogPost> GetBlogPosts(string tag)

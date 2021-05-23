@@ -28,6 +28,27 @@ namespace BloggingPlatform.API.Controllers
             var blogPosts = _blogPostService.GetBlogPosts(tag);
             return Ok(blogPosts);
         }
+        //GET api/posts/slug
+        [HttpGet("{slug}")]
+        public ActionResult<SingleBlogPostDTO> GetBlogPost([FromRoute] string slug)
+        {
+            try
+            {
+                var blogPost = _blogPostService.GetBlogPostBySlug(slug);
+                if (blogPost == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(blogPost);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
         //POST api/posts
         [HttpPost]
