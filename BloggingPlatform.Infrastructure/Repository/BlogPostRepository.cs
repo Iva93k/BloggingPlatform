@@ -18,7 +18,9 @@ namespace BloggingPlatform.Infrastructure.Repository
         }
         public BlogPost CreateBlogPost(BlogPost blogPost)
         {
-            throw new NotImplementedException();
+            _efcontext.BlogPost.Add(blogPost);
+            _efcontext.SaveChanges();
+            return blogPost;
         }
 
         public void Delete(string slug)

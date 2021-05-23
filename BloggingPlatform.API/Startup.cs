@@ -34,7 +34,8 @@ namespace BloggingPlatform.API
             services.AddDbContext<EFContext>(opts =>
                 opts.UseSqlServer(Configuration.GetConnectionString("SqlConnection"),
                     options => options.MigrationsAssembly("BloggingPlatform.Infrastructure")));
-
+            services.AddScoped<ITagService, TagService>();
+            services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<IBlogPostService, BlogPostService>();
             services.AddScoped<IBlogPostRepository, BlogPostRepository>();
             services.AddControllers();

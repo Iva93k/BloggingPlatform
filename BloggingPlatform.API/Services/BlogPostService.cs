@@ -3,6 +3,7 @@ using BloggingPlatform.API.Models.BindingModels;
 using BloggingPlatform.API.Models.DTOModels;
 using BloggingPlatform.Core.Entities;
 using BloggingPlatform.Core.Interfaces;
+using BloggingPlatform.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,19 +14,42 @@ namespace BloggingPlatform.API.Services
     public class BlogPostService : IBlogPostService
     {
         private readonly IBlogPostRepository _blogPostRepository;
-        public BlogPostService(IBlogPostRepository blogPostRepository)
+        private readonly ITagRepository _tagRepository;
+        public BlogPostService(IBlogPostRepository blogPostRepository, ITagRepository tagRepository)
         {
             _blogPostRepository = blogPostRepository;
+            _tagRepository = tagRepository;
         }
         public SingleBlogPostDTO CreateBlogPost(BlogPostBindingModel blogPostModel)
         {
-            //transform post u blogPost entity?
-            //var blogPost = _blogPostRepository.Create(blogPostEntity);
-            //transfrom entity u singlepostdto
-            //return singlepostdto
+            BlogPost blogPost = new BlogPost();
+            //List<string> tags = new List<string>();
+            List<Tag> tags = new List<Tag>();
 
-            //ili sta 
-            throw new NotImplementedException();
+            blogPost.Title = blogPostModel.Title;
+            blogPost.Description = blogPostModel.Description;
+            blogPost.Body = blogPostModel.Body;
+            blogPost.CreatedAt = DateTime.Now;
+            blogPost.Slug = SlugifyManager.Slugify(blogPostModel.Title);
+
+            blogPost.Tags = tags;
+
+            if (blogPostModel.TagList != null)
+            {
+                foreach (var singleTag in blogPostModel.TagList)
+                {
+                    Tag tag = new Tag();
+                    tag = _tagRepository.GetTagByTitle(singleTag);
+                    //tags.Add(tag);
+                    //blogPost.Tags = tags;
+                    blogPost.Tags.Add(tag);
+                }
+            }
+            var createdBlogPost = _blogPostRepository.CreateBlogPost(blogPost);
+            SingleBlogPostDTO singleBlogPostDTO = new SingleBlogPostDTO();
+            singleBlogPostDTO = GetBlogPostBySlug(createdBlogPost.Slug);
+
+            return singleBlogPostDTO;
         }
         public void Delete(string slug)
         {

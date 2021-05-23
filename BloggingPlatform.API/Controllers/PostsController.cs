@@ -66,15 +66,27 @@ namespace BloggingPlatform.API.Controllers
 
         //POST api/posts
         [HttpPost]
-        public  ActionResult<BlogPostDTO> Create([FromBody] BlogPostBindingModel post)
+        public  ActionResult<BlogPostDTO> Create([FromBody] BlogPostBinding post)
         {
-            if(post == null)
+            try
             {
-                return BadRequest();
-            }
+                if (post.BlogPost == null)
+                {
+                    return BadRequest("Post object is null!");
+                }
 
-            var blogPost = _blogPostService.CreateBlogPost(post);
-            return Ok(blogPost);
+                if(!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid model object!");
+                }
+
+                var blogPostDTO = _blogPostService.CreateBlogPost(post.BlogPost);
+                return Ok(blogPostDTO);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }

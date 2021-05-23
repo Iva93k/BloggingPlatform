@@ -18,4 +18,8 @@ namespace BloggingPlatform.API.Models.BindingModels
         public string Body { get; set; }
         public string[]  TagList { get; set; }
     }
+    public class BlogPostBinding
+    {
+        public BlogPostBindingModel BlogPost { get; set; }
+    }
 }

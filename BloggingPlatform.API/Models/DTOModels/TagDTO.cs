@@ -7,5 +7,6 @@ namespace BloggingPlatform.API.Models.DTOModels
 {
     public class TagDTO
     {
+        public string[] Tags { get; set; }
     }
 }
