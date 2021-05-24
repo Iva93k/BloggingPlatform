@@ -11,8 +11,8 @@ namespace BloggingPlatform.API.Interfaces
     {
         MultipleBlogPostsDTO GetBlogPosts(string tag);
         SingleBlogPostDTO GetBlogPostBySlug(string slug);
-        SingleBlogPostDTO CreateBlogPost(BlogPostBindingModel blogPostModel);
-        SingleBlogPostDTO UpdateBlogPost(BlogPostBindingModel blogPostModel);
+        SingleBlogPostDTO CreateBlogPost(BlogPostCreateBindingModel blogPostModel);
+        SingleBlogPostDTO UpdateBlogPost(string slug, BlogPostUpdateBindingModel blogPostModel);
         void Delete(string slug);
     }
 }

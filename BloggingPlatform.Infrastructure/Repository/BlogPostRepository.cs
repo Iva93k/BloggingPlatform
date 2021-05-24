@@ -51,7 +51,9 @@ namespace BloggingPlatform.Infrastructure.Repository
 
         public BlogPost UpdateBlogPost(BlogPost blogPost)
         {
-            throw new NotImplementedException();
+            _efcontext.BlogPost.Update(blogPost);
+            _efcontext.SaveChanges();
+            return blogPost;
         }
     }
 }

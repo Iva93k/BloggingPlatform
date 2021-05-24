@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BloggingPlatform.API.Models.BindingModels
 {
-    public class BlogPostBindingModel
+    public class BlogPostCreateBindingModel
     {
         [Required(ErrorMessage = "You should provide a title value.")]
         [MaxLength(255, ErrorMessage = "Title can't be longer than 255  characters.")]
@@ -18,8 +18,20 @@ namespace BloggingPlatform.API.Models.BindingModels
         public string Body { get; set; }
         public string[]  TagList { get; set; }
     }
-    public class BlogPostBinding
+    public class BlogPostCreateBinding
     {
-        public BlogPostBindingModel BlogPost { get; set; }
+        public BlogPostCreateBindingModel BlogPost { get; set; }
     }
+    public class BlogPostUpdateBindingModel
+    {
+        [MaxLength(255, ErrorMessage = "Title can't be longer than 255  characters.")]
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Body { get; set; }
+    }
+    public class BlogPostUpdateBinding
+    {
+        public BlogPostUpdateBindingModel BlogPost { get; set; }
+    }
+
 }

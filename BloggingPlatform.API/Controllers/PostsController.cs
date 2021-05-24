@@ -66,7 +66,7 @@ namespace BloggingPlatform.API.Controllers
 
         //POST api/posts
         [HttpPost]
-        public  ActionResult<BlogPostDTO> Create([FromBody] BlogPostBinding post)
+        public  ActionResult<BlogPostDTO> Create([FromBody] BlogPostCreateBinding post)
         {
             try
             {
@@ -88,5 +88,35 @@ namespace BloggingPlatform.API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        //PUT api/posts/slug
+        [HttpPut("{slug}")]
+        public ActionResult<BlogPostDTO> Update([FromRoute] string slug, [FromBody] BlogPostUpdateBinding post)
+        {
+            try
+            {
+                if (post.BlogPost == null)
+                {
+                    return BadRequest("Post object is null!");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid model object!");
+                }
+
+                var blogPostEntity = _blogPostService.GetBlogPostBySlug(slug);
+                if(blogPostEntity.BlogPost == null)
+                {
+                    return NotFound($"Blog post with a slug: {slug}  hasn't been found!");
+                }
+                var blogPostDTO = _blogPostService.UpdateBlogPost(slug, post.BlogPost);
+                return Ok(blogPostDTO);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
     }
 }

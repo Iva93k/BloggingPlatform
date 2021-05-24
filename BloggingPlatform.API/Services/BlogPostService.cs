@@ -20,7 +20,7 @@ namespace BloggingPlatform.API.Services
             _blogPostRepository = blogPostRepository;
             _tagRepository = tagRepository;
         }
-        public SingleBlogPostDTO CreateBlogPost(BlogPostBindingModel blogPostModel)
+        public SingleBlogPostDTO CreateBlogPost(BlogPostCreateBindingModel blogPostModel)
         {
             BlogPost blogPost = new BlogPost();
             //List<string> tags = new List<string>();
@@ -126,9 +126,32 @@ namespace BloggingPlatform.API.Services
             return multipleBlogPostsDTO;
         }
 
-        public SingleBlogPostDTO UpdateBlogPost(BlogPostBindingModel blogPostModel)
+        public SingleBlogPostDTO UpdateBlogPost(string slug, BlogPostUpdateBindingModel blogPostModel)
         {
-            throw new NotImplementedException();
+            BlogPost blogPost = _blogPostRepository.GetBlogPostBySlug(slug);
+
+            if(!string.IsNullOrEmpty(blogPostModel.Title))
+            {
+                blogPost.Title = blogPostModel.Title;
+                blogPost.Slug = SlugifyManager.Slugify(blogPostModel.Title);
+            }
+            if(!string.IsNullOrEmpty(blogPostModel.Description))
+            {
+                blogPost.Description = blogPostModel.Description;
+            }
+            if (!string.IsNullOrEmpty(blogPostModel.Body))
+            {
+                blogPost.Body = blogPostModel.Body;
+            }
+
+            blogPost.UpdatedAt = DateTime.Now;
+
+            var updatedBlogPost = _blogPostRepository.UpdateBlogPost(blogPost);
+            SingleBlogPostDTO singleBlogPostDTO = new SingleBlogPostDTO();
+            singleBlogPostDTO = GetBlogPostBySlug(updatedBlogPost.Slug);
+
+            return singleBlogPostDTO;
+
         }
     }
 }
