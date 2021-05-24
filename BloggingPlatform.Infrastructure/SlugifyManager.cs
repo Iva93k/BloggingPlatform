@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BloggingPlatform.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -9,11 +10,7 @@ namespace BloggingPlatform.Infrastructure
 {
     public static class SlugifyManager
     {
-        /// <summary>  
-        /// Removes all accents from the input string.  
-        /// </summary>  
-        /// <param name="text">The input string.</param>  
-        /// <returns></returns>  
+        //Removes all accents from the input string.  
         public static string RemoveAccents(this string text)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -27,13 +24,9 @@ namespace BloggingPlatform.Infrastructure
             return new string(chars).Normalize(NormalizationForm.FormC);
         }
 
-        /// <summary>  
-        /// Turn a string into a slug by removing all accents,   
-        /// special characters, additional spaces, substituting   
-        /// spaces with hyphens & making it lower-case.  
-        /// </summary>  
-        /// <param name="phrase">The string to turn into a slug.</param>  
-        /// <returns></returns>  
+        // Turn a string into a slug by removing all accents,   
+        // special characters, additional spaces, substituting   
+        // spaces with hyphens & making it lower-case.  
         public static string Slugify(this string phrase)
         {
             // Remove all accents and make the string lower case.  
@@ -50,6 +43,21 @@ namespace BloggingPlatform.Infrastructure
 
             // Return the slug.  
             return output;
+        }
+
+        //Increments given slug if it already exists
+        public static string IncrementSlug(string slug, List<string> existingSlugs)
+        {
+            string original = slug;
+            int count = 2;
+
+            while (existingSlugs.Contains(slug))
+            {
+                slug = original + "-" + count;
+                count++;
+            }
+
+            return slug;
         }
     }
 }

@@ -56,5 +56,17 @@ namespace BloggingPlatform.Infrastructure.Repository
             _efcontext.SaveChanges();
             return blogPost;
         }
+
+        public List<string> Slugs()
+        {
+            List<string> slugs = _efcontext.BlogPost.Select(p => p.Slug).ToList();
+
+            return slugs;
+        }
+        public bool SlugExist(string slug)
+        {
+            bool slugExist = _efcontext.BlogPost.Any(p => p.Slug == slug);
+            return slugExist;
+        }
     }
 }

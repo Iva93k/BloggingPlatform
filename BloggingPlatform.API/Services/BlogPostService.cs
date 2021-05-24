@@ -30,7 +30,15 @@ namespace BloggingPlatform.API.Services
             blogPost.Description = blogPostModel.Description;
             blogPost.Body = blogPostModel.Body;
             blogPost.CreatedAt = DateTime.Now;
-            blogPost.Slug = SlugifyManager.Slugify(blogPostModel.Title);
+
+            string slug = SlugifyManager.Slugify(blogPostModel.Title);
+            blogPost.Slug = slug;
+
+            if (_blogPostRepository.SlugExist(slug))
+            {
+                List<string> existingSlugs = _blogPostRepository.Slugs();
+                blogPost.Slug = SlugifyManager.IncrementSlug(slug, existingSlugs);
+            }
 
             blogPost.Tags = tags;
 
@@ -134,9 +142,17 @@ namespace BloggingPlatform.API.Services
             if(!string.IsNullOrEmpty(blogPostModel.Title))
             {
                 blogPost.Title = blogPostModel.Title;
-                blogPost.Slug = SlugifyManager.Slugify(blogPostModel.Title);
+
+                string generatedSlug = SlugifyManager.Slugify(blogPostModel.Title);
+                blogPost.Slug = generatedSlug;
+
+                if (_blogPostRepository.SlugExist(generatedSlug))
+                {
+                    List<string> existingSlugs = _blogPostRepository.Slugs();
+                    blogPost.Slug = SlugifyManager.IncrementSlug(generatedSlug, existingSlugs);
+                }
             }
-            if(!string.IsNullOrEmpty(blogPostModel.Description))
+            if (!string.IsNullOrEmpty(blogPostModel.Description))
             {
                 blogPost.Description = blogPostModel.Description;
             }

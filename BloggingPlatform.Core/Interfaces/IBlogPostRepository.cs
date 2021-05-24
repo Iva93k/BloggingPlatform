@@ -13,5 +13,7 @@ namespace BloggingPlatform.Core.Interfaces
         BlogPost CreateBlogPost(BlogPost blogPost);
         BlogPost UpdateBlogPost(BlogPost blogPost);
         void Delete(BlogPost blogPost);
+        List<string> Slugs();
+        bool SlugExist(string slug);
     }
 }
