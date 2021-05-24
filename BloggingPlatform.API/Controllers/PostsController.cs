@@ -88,6 +88,7 @@ namespace BloggingPlatform.API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
         //PUT api/posts/slug
         [HttpPut("{slug}")]
         public ActionResult<BlogPostDTO> Update([FromRoute] string slug, [FromBody] BlogPostUpdateBinding post)
@@ -118,5 +119,27 @@ namespace BloggingPlatform.API.Controllers
             }
         }
 
+        //DELETE api/posts/slug
+        [HttpDelete("{slug}")]
+        public IActionResult Delete([FromRoute] string slug)
+        {
+            try
+            {
+                var blogPostEntity = _blogPostService.GetBlogPostBySlug(slug);
+                if (blogPostEntity.BlogPost == null)
+                {
+                    return NotFound($"Blog post with a slug: {slug}  hasn't been found!");
+                }
+                else
+                {
+                    _blogPostService.Delete(slug);
+                    return Ok($"Blog post with a slug {slug} has been successfully deleted!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
     }
 }

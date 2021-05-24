@@ -53,7 +53,8 @@ namespace BloggingPlatform.API.Services
         }
         public void Delete(string slug)
         {
-            throw new NotImplementedException();
+            BlogPost blogPost = _blogPostRepository.GetBlogPostBySlug(slug);
+            _blogPostRepository.Delete(blogPost);
         }
 
         public SingleBlogPostDTO GetBlogPostBySlug(string slug)

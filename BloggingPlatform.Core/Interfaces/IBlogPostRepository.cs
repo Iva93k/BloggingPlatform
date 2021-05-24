@@ -12,6 +12,6 @@ namespace BloggingPlatform.Core.Interfaces
         BlogPost GetBlogPostBySlug(string slug);
         BlogPost CreateBlogPost(BlogPost blogPost);
         BlogPost UpdateBlogPost(BlogPost blogPost);
-        void Delete(string slug);
+        void Delete(BlogPost blogPost);
     }
 }
